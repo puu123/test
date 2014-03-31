@@ -1,0 +1,17 @@
+<project name="foo-web" default="builder" basedir=".">
+  <property environment="env" />
+  <target name="builder">
+    <exec executable="${env.SystemRoot}\System32\xcopy.exe" osfamily="windows" dir="${basedir}">
+      <arg value="${basedir}\..\foo-common\target\classes"/>
+      <arg value="${basedir}\src\main\webapp\WEB-INF\classes"/>
+      <arg value="/D"/>
+      <arg value="/E"/>
+      <arg value="/Y"/>
+    </exec>
+    <exec executable="cp" osfamily="mac" dir="${basedir}">
+      <arg value="-R"/><arg value="-u"/><arg value="-f"/>
+      <arg value="${basedir}/../foo-common/target/classes"/>
+      <arg value="${basedir}/src/main/webapp/WEB-INF/"/>
+    </exec>
+  </target>
+</project>
