@@ -16,7 +16,7 @@ public class CsvLineIterator<T> implements Iterator<T>, Closeable {
 	
 	protected ExcelCSVParser parser;
 	
-	protected CsvConverter converter = new DefaltCsvConverter();
+	protected CsvConverter converter = new CsvConverterImpl();
 	
 	protected Class<T> type;
 	

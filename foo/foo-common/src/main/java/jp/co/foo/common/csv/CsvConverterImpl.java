@@ -2,7 +2,7 @@ package jp.co.foo.common.csv;
 
 import java.util.List;
 
-public class DefaltCsvConverter implements CsvConverter {
+public class CsvConverterImpl implements CsvConverter {
 
 	/* (non-Javadoc)
 	 * @see jp.co.foo.common.csv.CsvConverter#to(java.lang.String[], java.lang.Class)

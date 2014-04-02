@@ -16,7 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
-public class CsvLineIteratorFactoryBean {
+public class CsvLineIteratorFactory {
 	
 	protected char delimiter = ',';
 	

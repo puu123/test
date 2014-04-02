@@ -3,7 +3,7 @@
   <target name="builder">
     <exec executable="${env.SystemRoot}\System32\xcopy.exe" osfamily="windows" dir="${basedir}">
       <arg value="${basedir}\..\foo-common\target\classes"/>
-      <arg value="${basedir}\src\main\webapp\WEB-INF\classes"/>
+      <arg value="${basedir}\src\main\webapp\WEB-INF\classes\"/>
       <arg value="/D"/>
       <arg value="/E"/>
       <arg value="/Y"/>
