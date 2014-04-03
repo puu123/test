@@ -1,26 +1,39 @@
 package jp.co.foo.common.csv;
 
+import java.io.IOException;
+
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
+import org.supercsv.cellprocessor.ift.CellProcessor;
+import org.supercsv.io.ICsvBeanWriter;
 
 import com.Ostermiller.util.ExcelCSVPrinter;
 
 public class CsvOutputResultHandler<T> implements ResultHandler {
 	
-	protected ExcelCSVPrinter printer;
+	ICsvBeanWriter writer;
+	
+	String[] header;
+	
+	CellProcessor[] cellProcessors;
+	
 	 
-	public CsvOutputResultHandler(ExcelCSVPrinter printer) {
-		this.printer = printer;
+	public CsvOutputResultHandler(ICsvBeanWriter writer) {
+		this.writer = writer;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void handleResult(ResultContext context) {
-		T obj = (T)context.getResultObject();
-		outputRow(obj);
+		T rowData = (T)context.getResultObject();
+		outputRow(rowData);
 	}
 	
-	public void outputRow(T obj) {
-		printer.println();
+	public void outputRow(T rowData) {
+		try {
+			writer.write(rowData, header, cellProcessors);
+		} catch (IOException ex){
+			throw new RuntimeException(ex);
+		}
 	}
 }

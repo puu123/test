@@ -6,7 +6,9 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
-import com.Ostermiller.util.ExcelCSVPrinter;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
 public class CsvOutputResultHandlerFactory {
 	
@@ -18,12 +20,13 @@ public class CsvOutputResultHandlerFactory {
 	 
 	public <T> CsvOutputResultHandler<T> create(OutputStream out) {
 		
-		Writer writer = new OutputStreamWriter(
+		Writer outWriter = new OutputStreamWriter(
 				new BufferedOutputStream(out), Charset.forName(encoding));
-		ExcelCSVPrinter printer = new ExcelCSVPrinter(writer, quote, delimiter);
+		ICsvBeanWriter writer = 
+				new CsvBeanWriter(outWriter, CsvPreference.STANDARD_PREFERENCE);
 		
 		CsvOutputResultHandler<T>
-			handler = new CsvOutputResultHandler<T>(printer);
+			handler = new CsvOutputResultHandler<T>(writer);
 		
 		return handler;
 	}
