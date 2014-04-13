@@ -12,7 +12,7 @@ import java.util.Random;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Size;
 
-import jp.co.foo.data.dto.Foo;
+//import jp.co.foo.data.dto.Foo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,8 +48,8 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		Foo foo = new Foo();
-		foo.setName("abc");
+		//Foo foo = new Foo();
+		//foo.setName("abc");
 		
 		return "home";
 	}
@@ -66,8 +66,8 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		Foo foo = new Foo();
-		foo.setName("abc");
+		//Foo foo = new Foo();
+		//foo.setName("abc");
 		
 		return "home";
 	}
