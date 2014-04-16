@@ -46,6 +46,11 @@
 	<version>1.46</version>
 </dependency>
             
+            	<!-- Oracle Database -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+		</dependency>
 		<!-- Mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
