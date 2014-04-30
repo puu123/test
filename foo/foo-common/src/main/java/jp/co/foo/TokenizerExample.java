@@ -10,7 +10,7 @@ public class TokenizerExample {
 	 */
 	public static void main(String[] args) {
         Tokenizer tokenizer = Tokenizer.builder().build();
-        for (Token token : tokenizer.tokenize("寿司が食べたい。")) {
+        for (Token token : tokenizer.tokenize("株式会社東京UFJ三菱システム 本橋聡")) {
             System.out.println(token.getSurfaceForm() + "\t" + token.getAllFeatures());
         }
 
