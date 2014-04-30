@@ -14,9 +14,22 @@
 	<artifactId>foo-common</artifactId>
 	<name>foo-common</name>
 	<description>共通機能</description>
+	<repositories>
+<repository>
+    <id>Atilika Open Source repository</id>
+    <url>http://www.atilika.org/nexus/content/repositories/atilika</url>
+</repository>
+</repositories>
 
 	<!-- Dependency Settings -->
 	<dependencies>
+	<dependency>
+    <groupId>org.atilika.kuromoji</groupId>
+    <artifactId>kuromoji</artifactId>
+    <version>0.7.7</version>
+    <type>jar</type>
+    <scope>compile</scope>
+</dependency>
 <dependency>
 	<groupId>ch.qos.logback</groupId>
 	<artifactId>logback-classic</artifactId>
