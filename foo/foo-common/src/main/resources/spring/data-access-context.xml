@@ -16,35 +16,40 @@
   	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
-	<bean id="rawDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driverClass" value="${jdbc.driverClassName}" />
-		<property name="url"         value="${jdbc.url}" />
-		<property name="username"    value="${jdbc.username}" />
-		<property name="password"    value="${jdbc.password}" />
-	</bean>
-	
-	<bean id="org.h2.tools.Server-WebServer" class="org.h2.tools.Server" 
-	    factory-method="createWebServer" depends-on="dataSource" 
-	    init-method="start" lazy-init="false">
-	    <constructor-arg value="-web,-webPort,11111" />
-	</bean>	
 
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
-		<property name="targetDataSource" ref="rawDataSource"/>
+	<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
+		<property name="connectionCachingEnabled" value="true" />
+		<property name="URL"      value="jdbc:oracle:thin:@localhost:1521:XE"/>
+		<property name="user"     value="scott"/>
+		<property name="password" value="tiger"/>
+		<property name="connectionCacheProperties">
+			<value>
+				MinLimit:1
+				MaxLimit:5
+				InitialLimit:1
+				ConnectionWaitTimeout:120
+				InactivityTimeout:180
+				ValidateConnection:true
+			</value>
+		</property>
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
   		<property name="dataSource" ref="dataSource" />
-  		<property name="mapperLocations" value="classpath:mybatis/mapper/**/*.xml" />
+  		<property name="mapperLocations" value="classpath:Zip2Mapper.xml" />
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="jp.co.foo.infrastructure.persist.mybatis.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="basePackage" value="jp.co.foo.datamapper" />
 	</bean>
 	<bean id="batchSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 		<constructor-arg index="1" value="BATCH" />
 	</bean>
 
-<!--  -->
+	<!-- サービス実装クラスを登録. -->
+	<context:component-scan base-package="jp.co.foo.service.impl" >
+		<context:include-filter type="regex" expression="(.*?)Impl"/>
+	</context:component-scan>
+	
 </beans>    
