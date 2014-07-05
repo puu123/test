@@ -432,6 +432,12 @@
 			<version>8.1.10.v20130312</version>
 			<scope>test</scope>
 		</dependency>
+		
+		            	<!-- Oracle Database -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+		</dependency>
 	</dependencies>
 
 	<profiles>

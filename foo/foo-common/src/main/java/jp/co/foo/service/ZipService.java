@@ -4,4 +4,5 @@ import org.supercsv.io.dozer.CsvDozerBeanReader;
 
 public interface ZipService {
 	public void importFile(CsvDozerBeanReader reader) throws Exception;
+	public int count() ;
 }

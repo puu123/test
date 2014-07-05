@@ -10,8 +10,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 
-import jp.co.foo.dto.Zip2Dto;
-import jp.co.foo.service.ZipService;
+//import jp.co.foo.dto.Zip2Dto;
+//import jp.co.foo.service.ZipService;
 
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -50,182 +50,182 @@ public class Test {
         assertThat(foo.hashCode(), is(bar.hashCode()));
     }
     
-	@org.junit.Test
-	public void testCsvReader1() throws Exception {
-
-		ICsvBeanReader reader = null;		
-		reader = new CsvBeanReader(new FileReader(
-				"./data/foo.csv"), CsvPreference.EXCEL_PREFERENCE);
-		try {
-
-			final String[] header = reader.getHeader(true);
-			
-			ArrayList<String> list = new ArrayList<String>();
-			for (String string : header) {
-				list.add(string.trim());
-			}
-			
-			String[] nameMapping = list.toArray(new String[]{});
-			
-			UserBean user = null;
-			while ((user = reader.read(UserBean.class, nameMapping,
-					UserBean.PROCESSORS)) != null) {
-				
-				System.out.println(reader.getLineNumber());
-				System.out.println(reader.getRowNumber());
-				System.out.println(reader.getUntokenizedRow());
-				
-				// 取得要素をコンソールへ出力
-				System.out.print("ユーザ名:" + user.getUsername());
-				System.out.print(" パスワード:" + user.getPassword());
-				System.out.print(" 日付:" + user.getDate());
-				System.out.print(" 郵便番号:" + user.getZip());
-				System.out.println(" 住所:" + user.getTown());
-			}
-		} finally {
-			reader.close();
-		}
-	}
-
-	@org.junit.Test
-	public void testCsvReader2() throws Exception {
-
-		CsvDozerBeanReader inFile = null;		
-		inFile = new CsvDozerBeanReader(new FileReader(
-				"./data/foo.csv"), CsvPreference.EXCEL_PREFERENCE);
-		try {
-
-			final String[] header = inFile.getHeader(true);
-			inFile.configureBeanMapping(UserBean.class, FIELD_MAPPING);
-			
-			UserBean user = null;
-			while ((user = inFile.read(UserBean.class, UserBean.PROCESSORS)) != null) {
-				// 取得要素をコンソールへ出力
-				System.out.print("ユーザ名:" + user.getUsername());
-				System.out.print(" パスワード:" + user.getPassword());
-				System.out.print(" 日付:" + user.getDate());
-				System.out.print(" 郵便番号:" + user.getZip());
-				System.out.println(" 住所:" + user.getTown());
-			}
-		} finally {
-			inFile.close();
-		}
-	}
-
-	@org.junit.Test
-	public void testCsvReader3() throws Exception {
-		
-		ApplicationContext c = new ClassPathXmlApplicationContext("spring/data-access-context.xml");
-		ZipService service = c.getBean(ZipService.class);
-
-		CsvDozerBeanReader inFile = null;		
-		inFile = new CsvDozerBeanReader(
-				 new BufferedReader(new InputStreamReader(new FileInputStream("./data/KEN_ALL.csv"),"Windows-31j")),				
-				CsvPreference.EXCEL_PREFERENCE);
-		try {
-
-			final String[] header = inFile.getHeader(true);
-			inFile.configureBeanMapping(Zip2Dto.class, FIELD_MAPPING2);
-			service.importFile(inFile);
-			
-		} finally {
-			inFile.close();
-		}
-	}
-	
-	private static final String[] FIELD_MAPPING = new String[] {
-		"username",
-		"password",
-		"date",
-		"zip",
-		"town"
-        };
-	private static final String[] FIELD_MAPPING2 = new String[] { "jisCode",
-			"postalCodeOld", "postalCode", "prefectureKana", "cityKana",
-			"townKana", "prefectureKanji", "cityKanji", "townKanji",
-			"townDivideFlag", "koazaBanchiFlag", "tyhoumeFlag",
-			"hasSomeTownFlag", "updateStateFlag", "updateReason", };
-
-    public static class UserBean {
-        
-        /** 各要素フォーマット定義 */
-        public static final CellProcessor[] PROCESSORS = new CellProcessor[] {
-                new Unique(new StrMinMax(4, 20)),    // username
-                new StrMinMax(7, 35),                // password
-                new ParseDate("dd/MM/yyyy"),         // date
-                new Optional(new Trim(new ParseInt())),        // zip
-                null                                 // town
-        };
-        
-		/* 各要素の Getter/Setter 定義 */
-
-		private String username; 
-		private String password;
-		private String town;
-		private Date date;
-		private int zip;
-		/**
-		 * @return the username
-		 */
-		public String getUsername() {
-			return username;
-		}
-		/**
-		 * @param username the username to set
-		 */
-		public void setUsername(String username) {
-			this.username = username;
-		}
-		/**
-		 * @return the password
-		 */
-		public String getPassword() {
-			return password;
-		}
-		/**
-		 * @param password the password to set
-		 */
-		public void setPassword(String password) {
-			this.password = password;
-		}
-		/**
-		 * @return the town
-		 */
-		public String getTown() {
-			return town;
-		}
-		/**
-		 * @param town the town to set
-		 */
-		public void setTown(String town) {
-			this.town = town;
-		}
-		/**
-		 * @return the date
-		 */
-		public Date getDate() {
-			return date;
-		}
-		/**
-		 * @param date the date to set
-		 */
-		public void setDate(Date date) {
-			this.date = date;
-		}
-		/**
-		 * @return the zip
-		 */
-		public int getZip() {
-			return zip;
-		}
-		/**
-		 * @param zip the zip to set
-		 */
-		public void setZip(int zip) {
-			this.zip = zip;
-		}
-		
-		
-
-	}
+//	@org.junit.Test
+//	public void testCsvReader1() throws Exception {
+//
+//		ICsvBeanReader reader = null;		
+//		reader = new CsvBeanReader(new FileReader(
+//				"./data/foo.csv"), CsvPreference.EXCEL_PREFERENCE);
+//		try {
+//
+//			final String[] header = reader.getHeader(true);
+//			
+//			ArrayList<String> list = new ArrayList<String>();
+//			for (String string : header) {
+//				list.add(string.trim());
+//			}
+//			
+//			String[] nameMapping = list.toArray(new String[]{});
+//			
+//			UserBean user = null;
+//			while ((user = reader.read(UserBean.class, nameMapping,
+//					UserBean.PROCESSORS)) != null) {
+//				
+//				System.out.println(reader.getLineNumber());
+//				System.out.println(reader.getRowNumber());
+//				System.out.println(reader.getUntokenizedRow());
+//				
+//				// 取得要素をコンソールへ出力
+//				System.out.print("ユーザ名:" + user.getUsername());
+//				System.out.print(" パスワード:" + user.getPassword());
+//				System.out.print(" 日付:" + user.getDate());
+//				System.out.print(" 郵便番号:" + user.getZip());
+//				System.out.println(" 住所:" + user.getTown());
+//			}
+//		} finally {
+//			reader.close();
+//		}
+//	}
+//
+//	@org.junit.Test
+//	public void testCsvReader2() throws Exception {
+//
+//		CsvDozerBeanReader inFile = null;		
+//		inFile = new CsvDozerBeanReader(new FileReader(
+//				"./data/foo.csv"), CsvPreference.EXCEL_PREFERENCE);
+//		try {
+//
+//			final String[] header = inFile.getHeader(true);
+//			inFile.configureBeanMapping(UserBean.class, FIELD_MAPPING);
+//			
+//			UserBean user = null;
+//			while ((user = inFile.read(UserBean.class, UserBean.PROCESSORS)) != null) {
+//				// 取得要素をコンソールへ出力
+//				System.out.print("ユーザ名:" + user.getUsername());
+//				System.out.print(" パスワード:" + user.getPassword());
+//				System.out.print(" 日付:" + user.getDate());
+//				System.out.print(" 郵便番号:" + user.getZip());
+//				System.out.println(" 住所:" + user.getTown());
+//			}
+//		} finally {
+//			inFile.close();
+//		}
+//	}
+//
+//	@org.junit.Test
+//	public void testCsvReader3() throws Exception {
+//		
+//		ApplicationContext c = new ClassPathXmlApplicationContext("spring/data-access-context.xml");
+//		ZipService service = c.getBean(ZipService.class);
+//
+//		CsvDozerBeanReader inFile = null;		
+//		inFile = new CsvDozerBeanReader(
+//				 new BufferedReader(new InputStreamReader(new FileInputStream("./data/KEN_ALL.csv"),"Windows-31j")),				
+//				CsvPreference.EXCEL_PREFERENCE);
+//		try {
+//
+//			final String[] header = inFile.getHeader(true);
+//			inFile.configureBeanMapping(Zip2Dto.class, FIELD_MAPPING2);
+//			service.importFile(inFile);
+//			
+//		} finally {
+//			inFile.close();
+//		}
+//	}
+//	
+//	private static final String[] FIELD_MAPPING = new String[] {
+//		"username",
+//		"password",
+//		"date",
+//		"zip",
+//		"town"
+//        };
+//	private static final String[] FIELD_MAPPING2 = new String[] { "jisCode",
+//			"postalCodeOld", "postalCode", "prefectureKana", "cityKana",
+//			"townKana", "prefectureKanji", "cityKanji", "townKanji",
+//			"townDivideFlag", "koazaBanchiFlag", "tyhoumeFlag",
+//			"hasSomeTownFlag", "updateStateFlag", "updateReason", };
+//
+//    public static class UserBean {
+//        
+//        /** 各要素フォーマット定義 */
+//        public static final CellProcessor[] PROCESSORS = new CellProcessor[] {
+//                new Unique(new StrMinMax(4, 20)),    // username
+//                new StrMinMax(7, 35),                // password
+//                new ParseDate("dd/MM/yyyy"),         // date
+//                new Optional(new Trim(new ParseInt())),        // zip
+//                null                                 // town
+//        };
+//        
+//		/* 各要素の Getter/Setter 定義 */
+//
+//		private String username; 
+//		private String password;
+//		private String town;
+//		private Date date;
+//		private int zip;
+//		/**
+//		 * @return the username
+//		 */
+//		public String getUsername() {
+//			return username;
+//		}
+//		/**
+//		 * @param username the username to set
+//		 */
+//		public void setUsername(String username) {
+//			this.username = username;
+//		}
+//		/**
+//		 * @return the password
+//		 */
+//		public String getPassword() {
+//			return password;
+//		}
+//		/**
+//		 * @param password the password to set
+//		 */
+//		public void setPassword(String password) {
+//			this.password = password;
+//		}
+//		/**
+//		 * @return the town
+//		 */
+//		public String getTown() {
+//			return town;
+//		}
+//		/**
+//		 * @param town the town to set
+//		 */
+//		public void setTown(String town) {
+//			this.town = town;
+//		}
+//		/**
+//		 * @return the date
+//		 */
+//		public Date getDate() {
+//			return date;
+//		}
+//		/**
+//		 * @param date the date to set
+//		 */
+//		public void setDate(Date date) {
+//			this.date = date;
+//		}
+//		/**
+//		 * @return the zip
+//		 */
+//		public int getZip() {
+//			return zip;
+//		}
+//		/**
+//		 * @param zip the zip to set
+//		 */
+//		public void setZip(int zip) {
+//			this.zip = zip;
+//		}
+//		
+//		
+//
+//	}
 }
