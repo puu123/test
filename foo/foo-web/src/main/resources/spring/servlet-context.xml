@@ -27,7 +27,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="jp.co.foo" />
-	<aop:aspectj-autoproxy proxy-target-class="true"/> 
+	<aop:aspectj-autoproxy /> 
 	
 	<beans:bean id="validator"
 	            class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>

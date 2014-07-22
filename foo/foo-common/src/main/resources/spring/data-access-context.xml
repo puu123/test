@@ -36,7 +36,8 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
   		<property name="dataSource" ref="dataSource" />
-  		<property name="mapperLocations" value="classpath:Zip2Mapper.xml" />
+  		<property name="mapperLocations" value="classpath:*Mapper.xml" />
+  		<property name="configLocation"  value="classpath:mybatis/mybatis-config2.xml" />
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />

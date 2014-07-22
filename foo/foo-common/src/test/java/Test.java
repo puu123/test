@@ -10,6 +10,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 
+import jp.co.foo.datamapper.DeptMapper;
+import jp.co.foo.datamapper.EmpMapper;
+import jp.co.foo.dto.DeptDto;
+import jp.co.foo.dto.DeptExample;
+import jp.co.foo.dto.EmpDto;
+import jp.co.foo.dto.EmpExample;
+import jp.co.foo.dto.Zip2Dto;
+import jp.co.foo.service.ZipService;
+
 //import jp.co.foo.dto.Zip2Dto;
 //import jp.co.foo.service.ZipService;
 
@@ -32,23 +41,44 @@ import org.supercsv.prefs.CsvPreference;
 
 import static org.powermock.api.mockito.PowerMockito.*; 
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(String.class)
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest(String.class)
 public class Test {
 	
-    @org.junit.Test
-    public void testHashCodeEquivalent() {
-        String foo = "foo";
-        String bar = "bar";
-
-        assertThat(foo.hashCode(), is(not(bar.hashCode())));
-        
-        bar = spy(bar);
-        when(bar.hashCode()).thenReturn(foo.hashCode());
-        
-        assertThat(bar, is("bar"));
-        assertThat(foo.hashCode(), is(bar.hashCode()));
-    }
+//    @org.junit.Test
+//    public void testHashCodeEquivalent() {
+//        String foo = "foo";
+//        String bar = "bar";
+//
+//        assertThat(foo.hashCode(), is(not(bar.hashCode())));
+//        
+//        bar = spy(bar);
+//        when(bar.hashCode()).thenReturn(foo.hashCode());
+//        
+//        assertThat(bar, is("bar"));
+//        assertThat(foo.hashCode(), is(bar.hashCode()));
+//    }
+    
+    
+	@org.junit.Test
+	public void testLazy() throws Exception {
+		ApplicationContext c = new ClassPathXmlApplicationContext("spring/data-access-context.xml");
+//		{
+//			EmpMapper mapper = c.getBean(EmpMapper.class);
+//			int cnt = mapper.countByExample(new EmpExample());
+//			System.out.println(cnt);
+//		}
+		{
+			DeptMapper mapper = c.getBean(DeptMapper.class);
+			int cnt = mapper.countByExample(new DeptExample());
+			System.out.println(cnt);
+			DeptDto dept = mapper.selectByPrimaryKey((short)20);
+			System.out.println("***"+dept.getDname());
+			for(EmpDto emp: dept.getEmps()){
+				System.out.println(emp.getEname());
+			}
+		}
+	}
     
 //	@org.junit.Test
 //	public void testCsvReader1() throws Exception {
@@ -140,11 +170,11 @@ public class Test {
 //		"zip",
 //		"town"
 //        };
-//	private static final String[] FIELD_MAPPING2 = new String[] { "jisCode",
-//			"postalCodeOld", "postalCode", "prefectureKana", "cityKana",
-//			"townKana", "prefectureKanji", "cityKanji", "townKanji",
-//			"townDivideFlag", "koazaBanchiFlag", "tyhoumeFlag",
-//			"hasSomeTownFlag", "updateStateFlag", "updateReason", };
+	private static final String[] FIELD_MAPPING2 = new String[] { "jisCode",
+			"postalCodeOld", "postalCode", "prefectureKana", "cityKana",
+			"townKana", "prefectureKanji", "cityKanji", "townKanji",
+			"townDivideFlag", "koazaBanchiFlag", "tyhoumeFlag",
+			"hasSomeTownFlag", "updateStateFlag", "updateReason", };
 //
 //    public static class UserBean {
 //        
