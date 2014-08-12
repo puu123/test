@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @Validated
-@Scope( proxyMode = ScopedProxyMode.TARGET_CLASS )
+//@Scope( proxyMode = ScopedProxyMode.TARGET_CLASS )
 //http://stackoverflow.com/questions/7638251/mixing-jdk-and-cglib-proxies-within-spring
 /*
  * Something doesn't match here - if ther is a $ProxyXX, it means there is an interface. Make sure there is no interface. 
@@ -72,21 +72,21 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/{num}/index.html", method = RequestMethod.GET)
-	public String homeN(@Size(min = 5, max = 5) @PathVariable("num") String num, Locale locale, Model model) {
-		
-		logger.info("Welcome home! ^^; The client locale is {}. {}", locale, num);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		//Foo foo = new Foo();
-		//foo.setName("abc");
-		
-		return "home";
-	}
+//	@RequestMapping(value = "/{num}/index.html", method = RequestMethod.GET)
+//	public String homeN(@Size(min = 5, max = 5) @PathVariable("num") String num, Locale locale, Model model) {
+//		
+//		logger.info("Welcome home! ^^; The client locale is {}. {}", locale, num);
+//		
+//		Date date = new Date();
+//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+//		
+//		String formattedDate = dateFormat.format(date);
+//		
+//		model.addAttribute("serverTime", formattedDate );
+//		
+//		//Foo foo = new Foo();
+//		//foo.setName("abc");
+//		
+//		return "home";
+//	}
 }

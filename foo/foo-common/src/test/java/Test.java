@@ -59,7 +59,6 @@ public class Test {
 //        assertThat(foo.hashCode(), is(bar.hashCode()));
 //    }
     
-    
 	@org.junit.Test
 	public void testLazy() throws Exception {
 		ApplicationContext c = new ClassPathXmlApplicationContext("spring/data-access-context.xml");
